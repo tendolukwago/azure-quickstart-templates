@@ -148,14 +148,14 @@ echo "completed ubuntu devbox install on pid $$"
 sudo apt-get update
 
 #Make mavin site folder
-sudo mkdir /home/mavinvmadmin/Desktop/mavin-site
-sudo chmod a+rw /home/mavinvmadmin/Desktop/mavin-site
+sudo mkdir /home/$AZUREUSER/Desktop/mavin-site
+sudo chmod a+rw /home/$AZUREUSER/Desktop/mavin-site
 
 #Create cron job script
 sudo vim /etc/cron.weekly/check-for-update
 wget http://mavinrepo.eastus.cloudapp.azure.com/downloads/mavin/mavin-enterprise
-mv mavin-enterprise.zip /home/mavinvmadmin/Desktop/mavin-site
-cd /home/mavinvmadmin/Desktop/mavin-site
+mv mavin-enterprise.zip /home/$AZUREUSER/Desktop/mavin-site
+cd /home/$AZUREUSER/Desktop/mavin-site
 unzip -o mavin-enterprize.zip
 
 #set up cron job to run every sunday at midnight GMT
@@ -167,6 +167,6 @@ sudo chmod +x /etc/cron.weekly/check-for-update
 
 #Get site for the first time
 wget http://mavinrepo.eastus.cloudapp.azure.com/downloads/mavin/mavin-enterprise
-mv mavin-enterprise.zip /home/mavinvmadmin/Desktop/mavin-site
-cd /home/mavinvmadmin/Desktop/mavin-site
+mv mavin-enterprise.zip /home/$AZUREUSER/Desktop/mavin-site
+cd /home/$AZUREUSER/Desktop/mavin-site
 unzip -o mavin-enterprize.zip
