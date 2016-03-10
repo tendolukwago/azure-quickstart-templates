@@ -139,3 +139,34 @@ time sudo apt-get -y --force-yes install -f
 time rm /tmp/google-chrome-stable_current_amd64.deb
 date
 echo "completed ubuntu devbox install on pid $$"
+
+
+#########################################
+# Setup Mavin Update
+#########################################
+#Update Apt Get Packages
+sudo apt-get update
+
+#Make mavin site folder
+sudo mkdir /home/mavinvmadmin/Desktop/mavin-site
+sudo chmod a+rw /home/mavinvmadmin/Desktop/mavin-site
+
+#Create cron job script
+sudo vim /etc/cron.weekly/check-for-update
+wget http://mavinrepo.eastus.cloudapp.azure.com/downloads/mavin/mavin-enterprise
+mv mavin-enterprise.zip /home/mavinvmadmin/Desktop/mavin-site
+cd /home/mavinvmadmin/Desktop/mavin-site
+unzip -o mavin-enterprize.zip
+
+#set up cron job to run every sunday at midnight GMT
+sudo crontab -e
+0 0 * * 0 /etc/cron.weekly/check-for-update
+
+#make cron job file executable
+sudo chmod +x /etc/cron.weekly/check-for-update
+
+#Get site for the first time
+wget http://mavinrepo.eastus.cloudapp.azure.com/downloads/mavin/mavin-enterprise
+mv mavin-enterprise.zip /home/mavinvmadmin/Desktop/mavin-site
+cd /home/mavinvmadmin/Desktop/mavin-site
+unzip -o mavin-enterprize.zip
