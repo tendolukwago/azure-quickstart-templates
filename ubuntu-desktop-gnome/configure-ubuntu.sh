@@ -142,7 +142,7 @@ echo "completed ubuntu devbox install on pid $$"
 
 
 #########################################
-# Setup Mavin Update
+# Setup Mavin
 #########################################
 #Update Apt Get Packages
 sudo apt-get update
@@ -170,3 +170,6 @@ wget http://mavinrepo.eastus.cloudapp.azure.com/downloads/mavin/mavin-enterprise
 mv mavin-enterprise.zip /home/$AZUREUSER/Desktop/mavin-site
 cd /home/$AZUREUSER/Desktop/mavin-site
 unzip -o mavin-enterprize.zip
+
+#Set up iptables rerouting
+sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 3000
