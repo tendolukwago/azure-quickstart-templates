@@ -151,12 +151,13 @@ sudo apt-get update
 sudo -i -u $AZUREUSER mkdir $HOMEDIR/Desktop/mavin-site
 sudo -i -u $AZUREUSER chmod 755 $HOMEDIR/Desktop/mavin-site
 
-#Create cron job script and set permissions
-sudo -i -u $AZUREUSER touch /etc/cron.weekly/check-for-update
-sudo -i -u $AZUREUSER chmod 755 /etc/cron.weekly/check-for-update
+#Make mavin cron folder, create cron job script and set permissions
+sudo -i -u $AzureUser mkdir $HOMEDIR/Desktop/mavin-cron
+sudo -i -u $AZUREUSER touch $HOMEDIR/Desktop/mavin-cron/check-for-update
+sudo -i -u $AZUREUSER chmod 755 $HOMEDIR/Desktop/mavin-cron/check-for-update
 
 #write the to the cron job script file
-sudo -i -u $AZUREUSER /etc/cron.weekly/check-for-update <<EOF1
+sudo -i -u $AZUREUSER $HOMEDIR/Desktop/mavin-cron/check-for-update <<EOF1
 wget http://mavinrepo.eastus.cloudapp.azure.com/downloads/mavin/mavin-enterprise
 mv mavin-enterprise.zip $HOMEDIR/Desktop/mavin-site
 cd $HOMEDIR/Desktop/mavin-site
@@ -166,7 +167,7 @@ EOF1
 #set up cron job to run every sunday at midnight GMT
 crontab -l > updatecron
 #echo new cron into cron file
-echo "0 0 * * 0 /etc/cron.weekly/check-for-update" >> updatecron
+echo "0 0 * * 0 $HOMEDIR/Desktop/mavin-cron/check-for-update" >> updatecron
 #install new cron file
 crontab updatecron
 rm updatecron
