@@ -152,7 +152,7 @@ sudo -i -u $AZUREUSER mkdir $HOMEDIR/Desktop/mavin-site
 sudo -i -u $AZUREUSER chmod 755 $HOMEDIR/Desktop/mavin-site
 
 #Make mavin cron folder, create cron job script and set permissions
-sudo -i -u $AzureUser mkdir $HOMEDIR/Desktop/mavin-cron
+sudo -i -u $AZUREUSER mkdir $HOMEDIR/Desktop/mavin-cron
 sudo -i -u $AZUREUSER touch $HOMEDIR/Desktop/mavin-cron/check-for-update
 sudo -i -u $AZUREUSER chmod 755 $HOMEDIR/Desktop/mavin-cron/check-for-update
 
