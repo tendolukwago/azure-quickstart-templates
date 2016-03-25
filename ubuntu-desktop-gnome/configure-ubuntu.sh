@@ -156,14 +156,20 @@ sudo -i -u $AZUREUSER touch /etc/cron.weekly/check-for-update
 sudo -i -u $AZUREUSER chmod 755 /etc/cron.weekly/check-for-update
 
 #write the to the cron job script file
+sudo -i -u $AZUREUSER /etc/cron.weekly/check-for-update <<EOF1
 wget http://mavinrepo.eastus.cloudapp.azure.com/downloads/mavin/mavin-enterprise
 mv mavin-enterprise.zip $HOMEDIR/Desktop/mavin-site
 cd $HOMEDIR/Desktop/mavin-site
 unzip -o mavin-enterprize.zip
+EOF1
 
 #set up cron job to run every sunday at midnight GMT
-sudo crontab -e
-0 0 * * 0 /etc/cron.weekly/check-for-update
+crontab -l > updatecron
+#echo new cron into cron file
+echo "0 0 * * 0 /etc/cron.weekly/check-for-update" >> updatecron
+#install new cron file
+crontab updatecron
+rm updatecron
 
 #Get site for the first time
 wget http://mavinrepo.eastus.cloudapp.azure.com/downloads/mavin/mavin-enterprise
@@ -173,3 +179,6 @@ unzip -o mavin-enterprize.zip
 
 #Set up iptables rerouting
 sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 3000
+
+#Save iptables save
+sudo iptables-save
