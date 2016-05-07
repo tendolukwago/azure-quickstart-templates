@@ -151,6 +151,22 @@ sudo apt-get update
 sudo -i -u $AZUREUSER mkdir $HOMEDIR/Desktop/mavin-splash
 
 #Create mavin splash index page
+sudo -i -u $AZUREUSER touch $HOMEDIR/Desktop/mavin-splash/index.html
+sudo -i -u $AZUREUSER chmod 755 $HOMEDIR/Desktop/mavin-splash/index.html
+
+#Create the index.js page for routes
+sudo -i -u $AZUREUSER touch $HOMEDIR/Desktop/mavin-splash/index.js
+sudo -i -u $AZUREUSER chmod 755 $HOMEDIR/Desktop/mavin-splash/index.js
+
+#Create the app.js page
+sudo -i -u $AZUREUSER touch $HOMEDIR/Desktop/mavin-splash/app.js
+sudo -i -u $AZUREUSER chmod 755 $HOMEDIR/Desktop/mavin-splash/app.js
+
+#Create the package.json page
+sudo -i -u $AZUREUSER touch $HOMEDIR/Desktop/mavin-splash/package.json
+sudo -i -u $AZUREUSER chmod 755 $HOMEDIR/Desktop/mavin-splash/package.json
+
+#write to mavin splash index page
 sudo -i -u $AZUREUSER $HOMEDIR/Desktop/mavin-splash/index.html  <<-_EOF1_
     <!DOCTYPE html>
     <html>
@@ -254,7 +270,7 @@ sudo -i -u $AZUREUSER $HOMEDIR/Desktop/mavin-splash/index.html  <<-_EOF1_
     </html>
 _EOF1_
 
-#Create the index.js page for routes
+#Write to the index.js page
 sudo -i -u $AZUREUSER $HOMEDIR/Desktop/mavin-splash/index.js  <<_EOF2_
 
     var express = require('express');
@@ -269,7 +285,8 @@ sudo -i -u $AZUREUSER $HOMEDIR/Desktop/mavin-splash/index.js  <<_EOF2_
 
 _EOF2_
 
-#Create the app.js page
+
+#Write to the app.js page
 sudo -i -u $AZUREUSER $HOMEDIR/Desktop/mavin-splash/app.js <<_EOF3_
 
     //Require dependencies
@@ -289,7 +306,7 @@ sudo -i -u $AZUREUSER $HOMEDIR/Desktop/mavin-splash/app.js <<_EOF3_
     });
 _EOF3_
 
-#Create the package.json page
+#write to the package.json page
 sudo -i -u $AZUREUSER $HOMEDIR/Desktop/mavin-splash/package.json <<_EOF4_
 
     {
