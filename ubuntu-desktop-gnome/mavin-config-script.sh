@@ -167,7 +167,8 @@ sudo -i -u $AZUREUSER touch $HOMEDIR/Desktop/mavin-splash/package.json
 sudo -i -u $AZUREUSER chmod 755 $HOMEDIR/Desktop/mavin-splash/package.json
 
 #write to mavin splash index page
-sudo -i -u $AZUREUSER $HOMEDIR/Desktop/mavin-splash/index.html  <<-_EOF1_
+cat <<-EOF1 > $HOMEDIR/Desktop/mavin-splash/index.html
+
     <!DOCTYPE html>
     <html>
 
@@ -268,10 +269,10 @@ sudo -i -u $AZUREUSER $HOMEDIR/Desktop/mavin-splash/index.html  <<-_EOF1_
         </body>
 
     </html>
-_EOF1_
+EOF1
 
 #Write to the index.js page
-sudo -i -u $AZUREUSER $HOMEDIR/Desktop/mavin-splash/index.js  <<_EOF2_
+cat <<-EOF2 > $HOMEDIR/Desktop/mavin-splash/index.js
 
     var express = require('express');
     var router = express.Router();
@@ -283,11 +284,11 @@ sudo -i -u $AZUREUSER $HOMEDIR/Desktop/mavin-splash/index.js  <<_EOF2_
     });
     module.exports = router;
 
-_EOF2_
+EOF2
 
 
 #Write to the app.js page
-sudo -i -u $AZUREUSER $HOMEDIR/Desktop/mavin-splash/app.js <<_EOF3_
+cat <<-EOF3 > $HOMEDIR/Desktop/mavin-splash/app.js
 
     //Require dependencies
     var express = require('express');
@@ -304,10 +305,10 @@ sudo -i -u $AZUREUSER $HOMEDIR/Desktop/mavin-splash/app.js <<_EOF3_
         debug('Express server listening on port ' + server.address().port);
         console.log('Express server listening on port ' + server.address().port);
     });
-_EOF3_
+EOF3
 
 #write to the package.json page
-sudo -i -u $AZUREUSER $HOMEDIR/Desktop/mavin-splash/package.json <<_EOF4_
+cat <<-EOF4 > $HOMEDIR/Desktop/mavin-splash/package.json
 
     {
     "name": "mavinbusiness",
@@ -327,7 +328,7 @@ sudo -i -u $AZUREUSER $HOMEDIR/Desktop/mavin-splash/package.json <<_EOF4_
     "devDependencies": {}
     }
 
-_EOF4_
+EOF4
 
 #Download forever using npm
 sudo npm install forever -g --save
