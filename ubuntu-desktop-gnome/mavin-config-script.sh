@@ -151,10 +151,7 @@ sudo apt-get update
 sudo -i -u $AZUREUSER mkdir $HOMEDIR/Desktop/mavin-splash
 
 #Create mavin splash index page
-sudo -i -u $AZUREUSER touch $HOMEDIR/Desktop/mavin-splash/index.html
-
-#Write the index.html page
-cat <<- _EOF1_
+sudo -i -u $AZUREUSER $HOMEDIR/Desktop/mavin-splash/index.html  <<-_EOF1_
     <!DOCTYPE html>
     <html>
 
@@ -258,10 +255,7 @@ cat <<- _EOF1_
 _EOF1_
 
 #Create the index.js page for routes
-sudo -i -u $AZUREUSER touch $HOMEDIR/Desktop/mavin-splash/index.js
-
-#Write the index.js page
-cat <<- _EOF2_
+sudo -i -u $AZUREUSER $HOMEDIR/Desktop/mavin-splash/index.js  <<_EOF2_
 
     var express = require('express');
     var router = express.Router();
@@ -276,10 +270,7 @@ cat <<- _EOF2_
 _EOF2_
 
 #Create the app.js page
-sudo -i -u $AZUREUSER touch $HOMEDIR/Desktop/mavin-splash/app.js
-
-#Write the app.js page
-cat <<- _EOF3_
+sudo -i -u $AZUREUSER $HOMEDIR/Desktop/mavin-splash/app.js <<_EOF3_
 
     //Require dependencies
     var express = require('express');
@@ -299,10 +290,7 @@ cat <<- _EOF3_
 _EOF3_
 
 #Create the package.json page
-sudo -i -u $AZUREUSER touch $HOMEDIR/Desktop/mavin-splash/package.json
-
-#Write the package.json file
-cat <<- _EOF4_
+sudo -i -u $AZUREUSER $HOMEDIR/Desktop/mavin-splash/package.json <<_EOF4_
 
     {
     "name": "mavinbusiness",
@@ -322,7 +310,7 @@ cat <<- _EOF4_
     "devDependencies": {}
     }
 
-_EO4_
+_EOF4_
 
 #Download forever using npm
 sudo npm install forever -g --save
