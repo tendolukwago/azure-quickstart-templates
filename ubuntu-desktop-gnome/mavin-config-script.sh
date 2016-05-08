@@ -293,6 +293,8 @@ cat <<-EOF3 > $HOMEDIR/Desktop/mavin-splash/app.js
     //Require dependencies
     var express = require('express');
 
+    var app = express();
+
     //App Routes
     var routes = require('./index');
 
@@ -302,7 +304,6 @@ cat <<-EOF3 > $HOMEDIR/Desktop/mavin-splash/app.js
     app.set('port', 3000);
 
     var server = app.listen(app.get('port'), function() {
-        debug('Express server listening on port ' + server.address().port);
         console.log('Express server listening on port ' + server.address().port);
     });
 EOF3
@@ -335,13 +336,16 @@ sudo npm install forever -g --save
 
 #Set up iptables rerouting
 sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 3000
-sudo iptables -t nat -A PREROUTING -p tcp --dport 443 -j REDIRECT --to-ports 3000
+sudo iptables -t nat -A PREROUTING -p tcp --dport 443 -j REDIRECT --to-ports 3001
 
 #Save iptables save
 sudo iptables-save
 
 #Navigate to Mavin splash directory
 cd $HOMEDIR/Desktop/mavin-splash
+
+#Download the node packages from the package.json file
+npm install
 
 #Run the mavin splash page
 forever start app.js
